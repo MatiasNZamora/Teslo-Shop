@@ -1,4 +1,4 @@
-import { QuantitySelector, Title } from "@/components";
+import { Title } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import Image from "next/image";
@@ -92,9 +92,7 @@ export default function CheckoutPage() {
 
                             <p className="mb-5">
                                 {/* disclaimer */}
-                                <span className="text-xs">
-                                    Al hacer click en "Crear orden", aceptas nuestros <a href="#" className="underline">términos, condiciones de uso</a> y <a href="#" className="underline">politicas de privacidad</a>
-                                </span>
+                                <span className="text-xs">Al hacer clic en &quot;Confirmar orden&quot; aceptas nuestros términos y condiciones</span>
                             </p>
 
 

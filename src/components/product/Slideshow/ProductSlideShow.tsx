@@ -12,7 +12,6 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-import { Oi } from 'next/font/google';
 import Image from 'next/image';
 
 interface Props {
