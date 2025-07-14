@@ -1,17 +1,18 @@
 import { ProductSlideShow, ProductMobileSlideShow, QuantitySelector, SizeSelector } from "@/components";
 import { titleFont } from "@/config/fonts";
+import { Sizes } from "@/interfaces";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 
 interface Props {
-    params:{
+    params: Promise<{
         slug:string;
-    };
+    }>;
 };
 
-export default function({ params }:Props) {
+export default async function ProductBySlugPage({ params }:Props) {
 
-    const { slug } = params;
+    const { slug } = await params;
     const product = initialData.products.find( product => product.slug === slug );
 
     if(!slug) notFound();
@@ -21,16 +22,16 @@ export default function({ params }:Props) {
 
             {/* slideshow movil */} 
             <ProductMobileSlideShow 
-                title={ product.title }
-                images={ product.images }
+                title={ product?.title ?? '' }
+                images={ product?.images ?? [] }
                 className="block md:hidden"
             />
 
             {/* slideshow de escritorio */}
             <div className="col-span-1 md:col-span-2" >
                 <ProductSlideShow 
-                    title={ product.title }
-                    images={ product.images }
+                    title={ product?.title ?? '' }  
+                    images={ product?.images ?? [] }
                     className="hidden md:block"
                 />
             </div>
@@ -40,13 +41,15 @@ export default function({ params }:Props) {
 
                 <h1 className={`${titleFont.className} antialiased font-bold text-3xl`}> { product?.title } </h1>
                 <p className="text-lg mb-5">${ product?.price }</p>
-                
+
                 {/* selector de tallas  */}
-                <SizeSelector selectedSize={ product.sizes } availableSize={product.sizes} /> 
+                <SizeSelector 
+                    selectedSize={ product?.sizes?.[0] as Sizes } 
+                    availableSize={ product?.sizes ?? [] } 
+                /> 
                 
                 {/* selector de cantidad  */}
                 <QuantitySelector quantity={2} />
-                
                 {/* boton de cart  */}
                 <button className="btn-primary my-5"> Agregar al carrito </button>
 

@@ -5,7 +5,7 @@ import { titleFont } from '@/config/fonts';
 import Link from 'next/link';
 import { IoCardOutline } from 'react-icons/io5';
 
-export default function () {
+export default function OrdersPage() {
     return (
         <>
             <Title title="Orders" className={ titleFont.className } />
