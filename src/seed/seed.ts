@@ -1,3 +1,5 @@
+import bryptjs from 'bcryptjs';
+
 interface SeedProduct {
     description: string;
     images: string[];
@@ -11,16 +13,37 @@ interface SeedProduct {
     gender: 'men'|'women'|'kid'|'unisex'
 }
 
+interface SeerdUser {
+    email: string;
+    password: string;
+    name: string;
+    role: 'admin' | 'user'      
+}
+
 type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
 type ValidTypes = 'shirts'|'pants'|'hoodies'|'hats';
 
 interface SeedData {
     categories: string[],
     products: SeedProduct[],
+    users: SeerdUser[],
 }
 
 export const initialData: SeedData = {
-    
+    users:[
+        {
+            email: 'matias@google.com',
+            name: 'matias n zamora',
+            password: bryptjs.hashSync('1234567'),
+            role: 'admin',
+        },
+        {
+            email: 'mael@google.com',
+            name: 'Mael Zamora',
+            password: bryptjs.hashSync('1234567'),
+            role: 'user',
+        },
+    ],
     categories: [
         'shirts','pants','hoodies','hats',
     ],
