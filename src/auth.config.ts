@@ -15,6 +15,20 @@ export const authConfig: NextAuthConfig = {
     },
 
     callbacks: {
+
+        authorized({ auth, request: { nextUrl } }) {
+            console.log({ auth });
+            // const isLoggedIn = !!auth?.user;
+            // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+            // if (isOnDashboard) {
+            //   if (isLoggedIn) return true;
+            //   return false; // Redirect unauthenticated users to login page
+            // } else if (isLoggedIn) {
+            //   return Response.redirect(new URL('/dashboard', nextUrl));
+            // }
+            
+            return true;
+        },
         jwt({token, user}) {
             if(user){
                 token.data = user;
@@ -23,7 +37,7 @@ export const authConfig: NextAuthConfig = {
             return token;
         },
         session( {session, token, user } ){
-            console.log({session, token});
+            // console.log({session, token});
             session.user = token.data as any;
             return session;
         }
@@ -46,7 +60,7 @@ export const authConfig: NextAuthConfig = {
                     where: { email: email.toLowerCase() }
                 });
 
-                console.log({user})
+                // console.log({user})
                 // si no hay user return null
                 if (!user) throw new Error('User not found');
 
